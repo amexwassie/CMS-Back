@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
 const virtualMachineSchema = new mongoose.Schema({
-  ciId: {
+  Id: {
     type: String,
     required: true,
     unique: true,
     match: /^VM-\d{4}$/
   },
-  name: {
+  Name: {
     type: String,
     required: true,
     index: true
@@ -15,7 +15,7 @@ const virtualMachineSchema = new mongoose.Schema({
   hostname: String,
   ciType: {
     type: String,
-    required: true,
+    required: true, 
     enum: [
       'Application VM',
       'Database VM',

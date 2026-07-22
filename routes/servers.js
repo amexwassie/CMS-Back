@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
     const registration = new ServerRegistration(req.body);
     
     // Validate required fields
-    if (!registration.ciId || !registration.ciName || !registration.hostname) {
+    if (!registration.SerId || !registration.SerNameName || !registration.hostname) {
       return res.status(400).json({ error: 'ciId, ciName, and hostname are required' });
     }
 

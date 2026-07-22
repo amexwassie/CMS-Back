@@ -20,7 +20,7 @@ const employeeSchema = new mongoose.Schema({
   DEPARTMENT: String
 }, { timestamps: true });
 
-const Employee = mongoose.model('Employee', employeeSchema, 'employee_information');
+const Employee = mongoose.model('Employee', employeeSchema);
 
 // Configure multer for file uploads
 const storage = multer.memoryStorage();
@@ -42,7 +42,6 @@ const uploadEmployeeData = async (req, res) => {
       return res.status(400).json({ message: 'Excel file contains no data' });
     }
 
-    // Transform data
     const employees = data.map(row => ({
       EMP_ID: row.EMP_ID || row['Employee ID'],
       EMP_NAME: row.EMP_NAME || row['Employee Name'],
@@ -60,33 +59,11 @@ const uploadEmployeeData = async (req, res) => {
       DEPARTMENT: row.DEPARTMENT || row.Department
     }));
 
-    // Batch insert
-    const result = await Employee.insertMany(employees, {
-      ordered: false,
-      rawResult: true
-    });
-
-    const insertedCount = result.insertedCount;
-    const errors = result.writeErrors || [];
-
-    res.status(201).json({
-      message: `Upload successful. Inserted: ${insertedCount}, Errors: ${errors.length}`,
-      details: errors.map(e => e.errmsg)
-    });
+    const result = await Employee.insertMany(employees, { ordered: false });
+    res.status(201).json({ message: `Inserted ${result.length} records` });
   } catch (error) {
     console.error('Upload error:', error);
-
-    let message = 'Server error';
-    if (error.name === 'ValidationError') {
-      message = 'Data validation failed';
-    } else if (error.code === 11000) {
-      message = 'Duplicate employee ID found';
-    }
-
-    res.status(500).json({
-      message,
-      error: error.message
-    });
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
 

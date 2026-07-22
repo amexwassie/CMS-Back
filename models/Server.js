@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const serverRegistrationSchema = new mongoose.Schema({
-  ciId: { type: String, required: true },
-  ciName: { type: String, required: true },
+  SerId: { type: String, required: true },
+  SerName: { type: String, required: true },
   hostname: { type: String, required: true },
-  ciType: { type: String, enum: ['Rack Server', 'Blade Server', 'Tower Server', 'Mainframe'], required: true },
+  SerType: { type: String, enum: ['Rack Server', 'Blade Server', 'Tower Server', 'Mainframe'], required: true },
   manufacturer: { type: String, enum: ['Dell', 'HPE', 'Lenovo', 'IBM', 'Huawei', 'Cisco', 'Supermicro'], required: true },
   model: { type: String, required: true },
   serialNumber: { type: String, required: true },

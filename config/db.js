@@ -7,7 +7,7 @@ dotenv.config();
 const connectDB = async () => {
   try {
     // Log the MongoDB URI for verification (be cautious with sensitive data in production)
-    console.log('MongoDB URI:', process.env.MONGODB_URI); 
+    // console.log('MongoDB URI:', process.env.MONGODB_URI); 
     await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,

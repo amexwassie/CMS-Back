@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 // Import all routes
 const assetRoutes = require('./routes/asset');
 const authRoutes = require('./routes/auth');
+
 const dataCenterRoutes = require('./routes/datacenter');
 const departmentRoutes = require('./routes/department');
 const employeeRoutes = require('./routes/employees');
@@ -33,7 +34,7 @@ app.use('/api/assets', assetRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/datacenters', dataCenterRoutes);
 app.use('/api/departments', departmentRoutes);
-app.use('/api/employee_information', employeeRoutes);
+app.use('/api/employees', employeeRoutes);
 app.use('/api/hypervisors', hypervisorRoutes);
 app.use('/api/networkdevices', networkRoutes);
 app.use('/api/racks', rackRoutes);
